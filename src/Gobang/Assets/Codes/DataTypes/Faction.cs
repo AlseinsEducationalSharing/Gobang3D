@@ -1,4 +1,4 @@
-﻿enum Faction : byte
+﻿internal enum Faction : byte
 {
     None = 0,
     White = 1,

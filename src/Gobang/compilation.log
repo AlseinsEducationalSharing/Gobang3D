@@ -1,5 +1,5 @@
 ********************************************************************************
-*                             2018年6月17日 16:17:04                              *
+*                             2018年6月17日 18:57:27                              *
 ********************************************************************************
 CSharpCompilerWrapper.exe version: 4.0.4.230
 Unity version: 2018.1.5f1
@@ -13,9 +13,9 @@ Compiler: Microsoft C# 7.3 (2.8.0.62830)
 - Compilation ------------------------------------------------
 
 Process: D:\UnityProjects\Gobang3D\src\Gobang\CSharp70Support\Roslyn\csc.exe
-Arguments: -noconfig @Temp/UnityTempFile-576cc5094b8444148a3d0e2ec89607a5
+Arguments: -noconfig @Temp/UnityTempFile-35e89df05a3b2bd42aabaf625c4de3d2
 Exit code: 0
-Elapsed time: 1.33 sec
+Elapsed time: 1.18 sec
 
 - Output (0 lines):
 
@@ -27,6 +27,142 @@ Process: D:\UnityProjects\Gobang3D\src\Gobang\CSharp70Support\Roslyn\pdb2mdb.exe
 Arguments: Temp\Assembly-CSharp.dll
 Exit code: 0
 Elapsed time: 0.07 sec
+
+- Output (0 lines):
+
+- Errors (0 lines):
+
+********************************************************************************
+*                             2018年6月17日 18:58:00                              *
+********************************************************************************
+CSharpCompilerWrapper.exe version: 4.0.4.230
+Unity version: 2018.1.5f1
+Platform: Windows
+Target assembly: Assembly-CSharp.dll
+Project directory: D:\UnityProjects\Gobang3D\src\Gobang
+Target profile directory: UNKNOWN (but it's ok for Unity 2018.1)
+Unity Mono executable: C:\Program Files\Unity\Hub\Editor\2018.1.5f1\Editor\Data\MonoBleedingEdge\bin\mono.exe
+Compiler: Microsoft C# 7.3 (2.8.0.62830)
+
+- Compilation ------------------------------------------------
+
+Process: D:\UnityProjects\Gobang3D\src\Gobang\CSharp70Support\Roslyn\csc.exe
+Arguments: -noconfig @Temp/UnityTempFile-ca1cd22f5fd9bbf4bb08ed58e3b5606a
+Exit code: 0
+Elapsed time: 1.11 sec
+
+- Output (0 lines):
+
+- Errors (0 lines):
+
+- PDB to MDB conversion --------------------------------------
+
+Process: D:\UnityProjects\Gobang3D\src\Gobang\CSharp70Support\Roslyn\pdb2mdb.exe
+Arguments: Temp\Assembly-CSharp.dll
+Exit code: 0
+Elapsed time: 0.07 sec
+
+- Output (0 lines):
+
+- Errors (0 lines):
+
+********************************************************************************
+*                             2018年6月17日 19:00:57                              *
+********************************************************************************
+CSharpCompilerWrapper.exe version: 4.0.4.230
+Unity version: 2018.1.5f1
+Platform: Windows
+Target assembly: Unity.PackageManagerUI.Editor.dll
+Project directory: D:\UnityProjects\Gobang3D\src\Gobang
+Target profile directory: C:\Program Files\Unity\Hub\Editor\2018.1.5f1\Editor\Data\MonoBleedingEdge\lib\mono\unityjit
+Unity Mono executable: C:\Program Files\Unity\Hub\Editor\2018.1.5f1\Editor\Data\MonoBleedingEdge\bin\mono.exe
+Compiler: Microsoft C# 7.3 (2.8.0.62830)
+
+- Compilation ------------------------------------------------
+
+Process: D:\UnityProjects\Gobang3D\src\Gobang\CSharp70Support\Roslyn\csc.exe
+Arguments: -noconfig @Temp/UnityTempFile-184983e18a4e6de49ab52821fc546ab0
+Exit code: 0
+Elapsed time: 1.38 sec
+
+- Output (0 lines):
+
+- Errors (0 lines):
+
+- PDB to MDB conversion --------------------------------------
+
+Process: D:\UnityProjects\Gobang3D\src\Gobang\CSharp70Support\Roslyn\pdb2mdb.exe
+Arguments: Temp\Unity.PackageManagerUI.Editor.dll
+Exit code: 0
+Elapsed time: 0.08 sec
+
+- Output (0 lines):
+
+- Errors (0 lines):
+
+********************************************************************************
+*                             2018年6月17日 19:00:57                              *
+********************************************************************************
+CSharpCompilerWrapper.exe version: 4.0.4.230
+Unity version: 2018.1.5f1
+Platform: Windows
+Target assembly: UnityEditor.StandardEvents.dll
+Project directory: D:\UnityProjects\Gobang3D\src\Gobang
+Target profile directory: C:\Program Files\Unity\Hub\Editor\2018.1.5f1\Editor\Data\MonoBleedingEdge\lib\mono\unityjit
+Unity Mono executable: C:\Program Files\Unity\Hub\Editor\2018.1.5f1\Editor\Data\MonoBleedingEdge\bin\mono.exe
+Compiler: Microsoft C# 7.3 (2.8.0.62830)
+
+- Compilation ------------------------------------------------
+
+Process: D:\UnityProjects\Gobang3D\src\Gobang\CSharp70Support\Roslyn\csc.exe
+Arguments: -noconfig @Temp/UnityTempFile-2344491b2799a624d8c7c022ffbb3777
+Exit code: 0
+Elapsed time: 1.15 sec
+
+- Output (0 lines):
+
+- Errors (0 lines):
+
+- PDB to MDB conversion --------------------------------------
+
+Process: D:\UnityProjects\Gobang3D\src\Gobang\CSharp70Support\Roslyn\pdb2mdb.exe
+Arguments: Temp\UnityEditor.StandardEvents.dll
+Exit code: 0
+Elapsed time: 0.07 sec
+
+- Output (0 lines):
+
+- Errors (0 lines):
+
+********************************************************************************
+*                             2018年6月17日 19:00:59                              *
+********************************************************************************
+CSharpCompilerWrapper.exe version: 4.0.4.230
+Unity version: 2018.1.5f1
+Platform: Windows
+Target assembly: Assembly-CSharp.dll
+Project directory: D:\UnityProjects\Gobang3D\src\Gobang
+Target profile directory: UNKNOWN (but it's ok for Unity 2018.1)
+Unity Mono executable: C:\Program Files\Unity\Hub\Editor\2018.1.5f1\Editor\Data\MonoBleedingEdge\bin\mono.exe
+Compiler: Microsoft C# 7.3 (2.8.0.62830)
+
+- Compilation ------------------------------------------------
+
+Process: D:\UnityProjects\Gobang3D\src\Gobang\CSharp70Support\Roslyn\csc.exe
+Arguments: -noconfig @Temp/UnityTempFile-b97eed5acaed41e41b2ba9d99d614073
+Exit code: 0
+Elapsed time: 1.25 sec
+
+- Output (0 lines):
+
+- Errors (0 lines):
+
+- PDB to MDB conversion --------------------------------------
+
+Process: D:\UnityProjects\Gobang3D\src\Gobang\CSharp70Support\Roslyn\pdb2mdb.exe
+Arguments: Temp\Assembly-CSharp.dll
+Exit code: 0
+Elapsed time: 0.08 sec
 
 - Output (0 lines):
 

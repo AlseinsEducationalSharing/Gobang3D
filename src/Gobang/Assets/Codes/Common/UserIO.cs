@@ -1,43 +1,40 @@
 ﻿using System.Linq;
+using System.Threading.Tasks;
 using UnityEngine;
 
-static class UserIO
+internal class UserIO
 {
-    static UserIO()
-    {
-        WaitingForInput = false;
-    }
+    private Game _game;
 
-    private static GameObject BlackChess, WhiteChess;
+    public UserIO(Game game) => _game = game;
 
-    private static bool IsInitialized = false;
-    public static void Initialize()
+    private GameObject ChessCollection => _game.Chessboard.transform.GetChild(0).gameObject;
+    private GameObject ChessBlocks => _game.Chessboard.transform.GetChild(2).gameObject;
+
+    private GameObject BlackChess, WhiteChess;
+
+    private bool IsInitialized = false;
+    public void Initialize()
     {
         if (!IsInitialized)
         {
-            MapInvoker.Invoke(target =>
-            {
-                BlackChess = (GameObject)Resources.Load("Items/Black");
-                WhiteChess = (GameObject)Resources.Load("Items/White");
-            });
+            BlackChess = (GameObject)Resources.Load("Items/Black");
+            WhiteChess = (GameObject)Resources.Load("Items/White");
             IsInitialized = true;
         }
     }
 
-    private static GameSnapshot chessboardData = new GameSnapshot();
-    public static GameSnapshot ChessboardData
+    private GameSnapshot chessboardData = new GameSnapshot();
+    public GameSnapshot ChessboardData
     {
         set
         {
             if (value == new GameSnapshot())
             {
-                MapInvoker.Invoke(target =>
+                for (var i = ChessCollection.transform.childCount - 1; i >= 0; i--)
                 {
-                    for (var i = target.transform.childCount - 1; i >= 0; i--)
-                    {
-                        UnityEngine.Object.Destroy(target.transform.GetChild(i).gameObject);
-                    }
-                });
+                    Object.Destroy(ChessCollection.transform.GetChild(i).gameObject);
+                }
                 return;
             }
             var dif = value - chessboardData;
@@ -49,38 +46,13 @@ static class UserIO
             var map = value.Map;
             foreach (var item in dif)
             {
-                MapInvoker.Invoke(target =>
-                {
-                    var newChess = UnityEngine.Object.Instantiate(map[item.X, item.Y] == Faction.Black ? BlackChess : WhiteChess);
-                    newChess.transform.parent = target.transform;
-                    newChess.transform.localPosition = new Vector3((7 - item.X) * Const.UnitSize, 0, (item.Y - 7) * Const.UnitSize);
-                });
+                var newChess = Object.Instantiate(map[item.X, item.Y] == Faction.Black ? BlackChess : WhiteChess);
+                newChess.transform.parent = ChessCollection.transform;
+                newChess.transform.localPosition = new Vector3((7 - item.X) * Const.UnitSize, 0, (item.Y - 7) * Const.UnitSize);
             }
             chessboardData = value;
         }
     }
 
-    public static bool WaitingForInput { get; private set; }
-
-    public static Point GetClickPointOnChessboard()
-    {
-        try
-        {
-            WaitingForInput = true;
-            lock (Chessboard.ClickResult)
-            {
-                do
-                {
-                    SafeThread.HandleAbort();
-                } while (Chessboard.ClickResult.Count == 0);
-                return Chessboard.ClickResult.Dequeue();
-            }
-        }
-        finally
-        {
-            WaitingForInput = false;
-        }
-    }
-
-    public static Invoker<GameObject> MapInvoker { get; set; }
+    public async Task<Point> GetClickPointOnChessboard() => await ChessBlocks.GetComponent<Chessboard>().Result;
 }

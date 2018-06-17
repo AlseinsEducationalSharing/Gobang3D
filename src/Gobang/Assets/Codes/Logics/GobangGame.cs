@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-class GobangGame
+internal class GobangGame
 {
     public GameSnapshot Current { get; private set; }
 

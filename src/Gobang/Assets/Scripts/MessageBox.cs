@@ -1,34 +1,27 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class MessageBox : MonoBehaviour
 {
-    private static Invoker<GameObject> invoker;
-    public static void Show(string msg)
+    private Resulter _resulter = new Resulter();
+
+    public async Task Show(string message)
     {
-        invoker.Invoke(Instance =>
-        {
-            var text = Instance.transform.GetChild(0).GetChild(0).GetComponent<Text>();
-            text.text = $"<Color=#FFFFFF><Size=20>{msg}</Size></Color>";
-            Instance.gameObject.SetActive(true);
-        });
+        var text = gameObject.transform.GetChild(0).GetChild(0).GetComponent<Text>();
+        text.text = $"<Color=#FFFFFF><Size=20>{message}</Size></Color>";
+        gameObject.gameObject.SetActive(true);
+        await _resulter;
     }
 
     void Start()
     {
-        invoker = new Invoker<GameObject>(gameObject.transform.GetChild(0).gameObject);
-        gameObject.transform.GetChild(0).gameObject.SetActive(false);
-    }
-
-    void Update()
-    {
-        invoker.DispatchInvoke();
+        gameObject.SetActive(false);
     }
 
     public void Close()
     {
-        gameObject.transform.GetChild(0).gameObject.SetActive(false);
+        gameObject.SetActive(false);
+        _resulter.Result();
     }
 }

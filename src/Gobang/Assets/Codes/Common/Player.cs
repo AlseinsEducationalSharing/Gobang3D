@@ -1,8 +1,10 @@
-﻿abstract class Player
+﻿using System.Threading.Tasks;
+
+internal abstract class Player
 {
     public virtual string Name { get; set; }
 
-    public abstract Point GetNext();
+    public abstract Task<Point> GetNext();
 
     protected abstract void OnChanged();
 
@@ -17,14 +19,6 @@
         {
             gameData = value;
             OnChanged();
-        }
-    }
-
-    protected bool IsBackgroundWorkingTime
-    {
-        get
-        {
-            return UserIO.WaitingForInput;
         }
     }
 }

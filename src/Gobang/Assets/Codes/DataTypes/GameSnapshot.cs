@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-class GameSnapshot : IEnumerable<Point>
+internal class GameSnapshot : IEnumerable<Point>
 {
     private GameSnapshot Previous;
     private Point StepData;

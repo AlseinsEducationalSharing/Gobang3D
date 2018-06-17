@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class Chessboard : MonoBehaviour
 {
-    internal static Queue<Point> ClickResult { get; private set; } = new Queue<Point>();
-
-    void Start()
-    {
-    }
+    internal Resulter<Point> Result { get; private set; } = new Resulter<Point>();
 
     void OnMouseUp()
     {
@@ -21,7 +18,7 @@ public class Chessboard : MonoBehaviour
                 var p = transform.InverseTransformPoint(hit.point);
                 var x = 7 - (int)Math.Round(p.x / Const.UnitSize);
                 var y = 7 + (int)Math.Round(p.y / Const.UnitSize);
-                ClickResult.Enqueue(new Point(x, y));
+                Result.Result(new Point(x, y));
             }
         }
     }

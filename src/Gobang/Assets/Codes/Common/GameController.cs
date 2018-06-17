@@ -1,19 +1,15 @@
-﻿abstract class GameController
-{
-    public static GobangGameController Current { get; set; }
+﻿using System.Threading.Tasks;
 
-    public void Start()
+internal abstract class GameController
+{
+    public async Task Start()
     {
         InitializeGame();
-        do
-        {
-            SafeThread.HandleAbort();
-        }
-        while (HandleGame());
+        while (await HandleGame()) ;
         FinalizeGame();
     }
 
     protected abstract void InitializeGame();
-    protected abstract bool HandleGame();
+    protected abstract Task<bool> HandleGame();
     protected abstract void FinalizeGame();
 }

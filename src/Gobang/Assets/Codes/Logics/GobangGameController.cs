@@ -1,26 +1,31 @@
-﻿class GobangGameController : GameController
+﻿using System.Threading.Tasks;
+
+internal class GobangGameController : GameController
 {
-    private GobangGame Game;
+    private GobangGame GobangGame;
+    private Game _game;
     private Player BlackPlayer, WhitePlayer;
+
+    public GobangGameController(Game game) => _game = game;
 
     protected override void InitializeGame()
     {
-        Game = new GobangGame();
-        BlackPlayer = new ManualPlayer();
-        WhitePlayer = new ManualPlayer();
+        GobangGame = new GobangGame();
+        BlackPlayer = new ManualPlayer(_game);
+        WhitePlayer = new ManualPlayer(_game);
     }
 
-    protected override bool HandleGame()
+    protected override async Task<bool> HandleGame()
     {
-        var player = Game.Current.NextPlayer == Faction.Black ? BlackPlayer : WhitePlayer;
-        var pos = player.GetNext();
-        if (Game.PositionAvailable(pos))
+        var player = GobangGame.Current.NextPlayer == Faction.Black ? BlackPlayer : WhitePlayer;
+        var pos = await player.GetNext();
+        if (GobangGame.PositionAvailable(pos))
         {
-            Game.Next(pos);
-            player.GameData = Game.Current;
-            if (Game.CheckForWin(pos.X, pos.Y))
+            GobangGame.Next(pos);
+            player.GameData = GobangGame.Current;
+            if (GobangGame.CheckForWin(pos.X, pos.Y))
             {
-                MessageBox.Show(string.Format("{0}方胜利！", Game.Current.CurrentPlayer == Faction.Black ? "黑" : "白"));
+                await _game.ShowMessage(string.Format("{0}方胜利！", GobangGame.Current.CurrentPlayer == Faction.Black ? "黑" : "白"));
                 return false;
             }
         }
@@ -29,6 +34,6 @@
 
     protected override void FinalizeGame()
     {
-        UserIO.ChessboardData = new GameSnapshot();
+        _game.UserIO.ChessboardData = new GameSnapshot();
     }
 }

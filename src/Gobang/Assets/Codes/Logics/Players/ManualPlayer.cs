@@ -1,17 +1,22 @@
-﻿class ManualPlayer : Player
+﻿using System.Threading.Tasks;
+
+class ManualPlayer : Player
 {
-    public ManualPlayer()
+    private Game _game;
+
+    public ManualPlayer(Game game)
     {
-        UserIO.Initialize();
+        _game = game;
+        _game.UserIO.Initialize();
     }
 
-    public override Point GetNext()
+    public override Task<Point> GetNext()
     {
-        return UserIO.GetClickPointOnChessboard();
+        return _game.UserIO.GetClickPointOnChessboard();
     }
 
     protected override void OnChanged()
     {
-        UserIO.ChessboardData = GameData;
+        _game.UserIO.ChessboardData = GameData;
     }
 }

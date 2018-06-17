@@ -1,4 +1,4 @@
-﻿struct Point
+﻿internal struct Point
 {
     public int X { get; private set; }
     public int Y { get; private set; }
@@ -11,13 +11,6 @@
     public override string ToString()
     {
         return string.Format("({0},{1})", X, Y);
-    }
-    public static Point Null
-    {
-        get
-        {
-            return new Point() { X = -1, Y = -1 };
-        }
     }
 
     public override bool Equals(object obj)
