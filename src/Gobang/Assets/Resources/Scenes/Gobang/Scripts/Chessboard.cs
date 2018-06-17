@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -9,7 +6,7 @@ public class Chessboard : MonoBehaviour
 {
     internal Resulter<Point> Result { get; private set; } = new Resulter<Point>();
 
-    void OnMouseUp()
+    public void OnMouseUp()
     {
         if (Input.GetMouseButtonUp(0) && !EventSystem.current.IsPointerOverGameObject())
         {

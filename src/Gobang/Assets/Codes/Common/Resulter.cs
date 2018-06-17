@@ -3,16 +3,16 @@ using System.Threading.Tasks;
 
 internal class Resulter
 {
-    private TaskCompletionSource<object> source = new TaskCompletionSource<object>();
+    private TaskCompletionSource<object> _source = new TaskCompletionSource<object>();
 
-    private async Task GetTask() => await source.Task;
+    private async Task GetTask() => await _source.Task;
 
     public TaskAwaiter GetAwaiter() => GetTask().GetAwaiter();
 
     public void Result()
     {
-        var oldSource = source;
-        source = new TaskCompletionSource<object>();
+        var oldSource = _source;
+        _source = new TaskCompletionSource<object>();
         oldSource.SetResult(null);
     }
 }

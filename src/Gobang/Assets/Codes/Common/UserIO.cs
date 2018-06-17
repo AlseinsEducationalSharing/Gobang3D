@@ -5,26 +5,25 @@ using UnityEngine;
 internal class UserIO
 {
     private Game _game;
-
-    public UserIO(Game game) => _game = game;
+    private GameSnapshot _chessboardData = new GameSnapshot();
+    private GameObject _blackChess, _whiteChess;
+    private bool _isInitialized = false;
 
     private GameObject ChessCollection => _game.Chessboard.transform.GetChild(0).gameObject;
     private GameObject ChessBlocks => _game.Chessboard.transform.GetChild(2).gameObject;
 
-    private GameObject BlackChess, WhiteChess;
+    public UserIO(Game game) => _game = game;
 
-    private bool IsInitialized = false;
     public void Initialize()
     {
-        if (!IsInitialized)
+        if (!_isInitialized)
         {
-            BlackChess = (GameObject)Resources.Load("Items/Black");
-            WhiteChess = (GameObject)Resources.Load("Items/White");
-            IsInitialized = true;
+            _blackChess = (GameObject)Resources.Load("Items/Black");
+            _whiteChess = (GameObject)Resources.Load("Items/White");
+            _isInitialized = true;
         }
     }
 
-    private GameSnapshot chessboardData = new GameSnapshot();
     public GameSnapshot ChessboardData
     {
         set
@@ -37,7 +36,7 @@ internal class UserIO
                 }
                 return;
             }
-            var dif = value - chessboardData;
+            var dif = value - _chessboardData;
             if (dif == null)
             {
                 ChessboardData = new GameSnapshot();
@@ -46,13 +45,13 @@ internal class UserIO
             var map = value.Map;
             foreach (var item in dif)
             {
-                var newChess = Object.Instantiate(map[item.X, item.Y] == Faction.Black ? BlackChess : WhiteChess);
+                var newChess = Object.Instantiate(map[item.X, item.Y] == Faction.Black ? _blackChess : _whiteChess);
                 newChess.transform.parent = ChessCollection.transform;
                 newChess.transform.localPosition = new Vector3((7 - item.X) * Const.UnitSize, 0, (item.Y - 7) * Const.UnitSize);
             }
-            chessboardData = value;
+            _chessboardData = value;
         }
     }
 
-    public async Task<Point> GetClickPointOnChessboard() => await ChessBlocks.GetComponent<Chessboard>().Result;
+    public async Task<Point> GetClickPoint() => await ChessBlocks.GetComponent<Chessboard>().Result;
 }

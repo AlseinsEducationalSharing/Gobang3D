@@ -9,17 +9,17 @@ public class GameEntrance : MonoBehaviour
 
     private Game _game;
 
-    void Start()
+    public void Start()
     {
         _game = new Game(Chessboard, MessageBox);
         GameStart();
     }
 
-    async void GameStart()
+    private async void GameStart()
     {
         while (true)
         {
-            await new GobangGameController(_game).Start();
+            await new GobangGameWorkflow(_game).Start();
         }
     }
 }

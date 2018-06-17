@@ -1,16 +1,16 @@
 ﻿using System.Threading.Tasks;
 
-internal class GobangGameController : GameController
+internal class GobangGameWorkflow : GameWorkflow
 {
-    private GobangGame GobangGame;
+    private GobangGameData GobangGame;
     private Game _game;
     private Player BlackPlayer, WhitePlayer;
 
-    public GobangGameController(Game game) => _game = game;
+    public GobangGameWorkflow(Game game) => _game = game;
 
     protected override void InitializeGame()
     {
-        GobangGame = new GobangGame();
+        GobangGame = new GobangGameData();
         BlackPlayer = new ManualPlayer(_game);
         WhitePlayer = new ManualPlayer(_game);
     }
@@ -32,8 +32,5 @@ internal class GobangGameController : GameController
         return true;
     }
 
-    protected override void FinalizeGame()
-    {
-        _game.UserIO.ChessboardData = new GameSnapshot();
-    }
+    protected override void FinalizeGame() => _game.UserIO.ChessboardData = new GameSnapshot();
 }

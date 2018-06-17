@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-internal abstract class GameController
+internal abstract class GameWorkflow
 {
     public async Task Start()
     {

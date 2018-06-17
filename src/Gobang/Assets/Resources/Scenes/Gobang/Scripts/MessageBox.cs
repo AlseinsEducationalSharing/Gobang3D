@@ -14,10 +14,7 @@ public class MessageBox : MonoBehaviour
         await _resulter;
     }
 
-    void Start()
-    {
-        gameObject.SetActive(false);
-    }
+    public void Start() => gameObject.SetActive(false);
 
     public void Close()
     {

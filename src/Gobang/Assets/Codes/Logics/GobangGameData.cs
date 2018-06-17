@@ -1,13 +1,10 @@
 ﻿using System.Linq;
 
-internal class GobangGame
+internal class GobangGameData
 {
     public GameSnapshot Current { get; private set; }
 
-    public GobangGame()
-    {
-        Current = new GameSnapshot();
-    }
+    public GobangGameData() => Current = new GameSnapshot();
 
     public bool CheckForWin(int x, int y)
     {
@@ -20,8 +17,7 @@ internal class GobangGame
 
     private int CheckLine(int x, int y, int xo, int yo)
     {
-        int i;
-        for (i = 0; i < 4; i++)
+        for (var i = 0; i < 4; i++)
         {
             x += xo;
             y += yo;
@@ -32,10 +28,10 @@ internal class GobangGame
                 Current[x, y] != Current.CurrentPlayer
             )
             {
-                break;
+                return i;
             }
         }
-        return i;
+        return 4;
     }
 
     public bool PositionAvailable(Point pos)
@@ -46,8 +42,5 @@ internal class GobangGame
             !Current.Contains(pos);
     }
 
-    public void Next(Point pos)
-    {
-        Current += pos;
-    }
+    public void Next(Point pos) => Current += pos;
 }

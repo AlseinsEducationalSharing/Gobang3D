@@ -3,14 +3,14 @@ using System.Threading.Tasks;
 
 internal class Resulter<T>
 {
-    private TaskCompletionSource<T> source = new TaskCompletionSource<T>();
+    private TaskCompletionSource<T> _source = new TaskCompletionSource<T>();
 
-    public TaskAwaiter<T> GetAwaiter() => source.Task.GetAwaiter();
+    public TaskAwaiter<T> GetAwaiter() => _source.Task.GetAwaiter();
 
     public void Result(T result)
     {
-        var oldSource = source;
-        source = new TaskCompletionSource<T>();
+        var oldSource = _source;
+        _source = new TaskCompletionSource<T>();
         oldSource.SetResult(result);
     }
 }
