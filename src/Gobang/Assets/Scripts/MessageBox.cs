@@ -11,7 +11,7 @@ public class MessageBox : MonoBehaviour
         invoker.Invoke(Instance =>
         {
             var text = Instance.transform.GetChild(0).GetChild(0).GetComponent<Text>();
-            text.text = string.Format("<Color=#FFFFFF><Size=20>{0}</Size></Color>", msg);
+            text.text = $"<Color=#FFFFFF><Size=20>{msg}</Size></Color>";
             Instance.gameObject.SetActive(true);
         });
     }
