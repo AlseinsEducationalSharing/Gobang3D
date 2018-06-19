@@ -7,10 +7,10 @@ internal class Resulter<T>
 
     public TaskAwaiter<T> GetAwaiter() => _source.Task.GetAwaiter();
 
-    public void Result(T result)
+    public Task Result(T result)
     {
         var oldSource = _source;
         _source = new TaskCompletionSource<T>();
-        oldSource.SetResult(result);
+        return Task.Run(() => oldSource.SetResult(result));
     }
 }
