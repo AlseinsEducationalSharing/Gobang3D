@@ -71,14 +71,14 @@ internal class GameSnapshot : IEnumerable<Point>
         return result.ToArray();
     }
 
-    public static bool operator ==(GameSnapshot This, GameSnapshot Other) => ReferenceEquals(This, Other) || This.Equals(Other);
+    public static bool operator ==(GameSnapshot This, GameSnapshot Other) => ReferenceEquals(This, Other) || !(This is null) && This.Equals(Other);
 
-    public static bool operator !=(GameSnapshot This, GameSnapshot Other) => !ReferenceEquals(This, Other) && !This.Equals(Other);
+    public static bool operator !=(GameSnapshot This, GameSnapshot Other) => !(This == Other);
 
     public override bool Equals(object obj)
     {
         var other = obj as GameSnapshot;
-        return other != null && (other.StepCount == 0 && StepCount == 0 || other._stepData.Equals(_stepData) && other._previous == _previous);
+        return !(other is null) && (other.StepCount == 0 && StepCount == 0 || other._stepData.Equals(_stepData) && other._previous == _previous);
     }
 
     public override int GetHashCode() => base.GetHashCode();
