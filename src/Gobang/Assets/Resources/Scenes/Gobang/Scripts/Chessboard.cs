@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Point = Point<int>;
 
 public class Chessboard : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class Chessboard : MonoBehaviour
                 var p = transform.InverseTransformPoint(hit.point);
                 var x = 7 - (int)Math.Round(p.x / Const.UnitSize);
                 var y = 7 + (int)Math.Round(p.y / Const.UnitSize);
+
                 Result.Result(new Point(x, y));
             }
         }

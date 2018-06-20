@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Point = Point<int>;
 
 internal abstract class Player
 {

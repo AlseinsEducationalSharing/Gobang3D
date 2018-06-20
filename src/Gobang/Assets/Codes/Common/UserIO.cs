@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
+using Point = Point<int>;
 
 internal class UserIO
 {
@@ -36,19 +37,24 @@ internal class UserIO
                 }
                 return;
             }
+
             var dif = value - _chessboardData;
+
             if (dif == null)
             {
                 ChessboardData = new GameSnapshot();
                 dif = value.ToArray();
             }
+
             var map = value.Map;
+
             foreach (var item in dif)
             {
                 var newChess = Object.Instantiate(map[item.X, item.Y] == Faction.Black ? _blackChess : _whiteChess);
                 newChess.transform.parent = ChessCollection.transform;
                 newChess.transform.localPosition = new Vector3((7 - item.X) * Const.UnitSize, 0, (item.Y - 7) * Const.UnitSize);
             }
+
             _chessboardData = value;
         }
     }
