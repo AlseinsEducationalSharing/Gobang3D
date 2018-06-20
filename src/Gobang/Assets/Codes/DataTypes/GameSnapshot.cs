@@ -92,9 +92,9 @@ internal class GameSnapshot : IEnumerable<Point>
         StepCount = Previous.StepCount + 1;
     }
 
-    public Faction CurrentPlayer => StepCount % 2 == 1 ? Faction.Black : Faction.White;
+    public Faction CurrentPlayer => StepCount % 2 == 1 ? Const.FirstPlayer : 3 - Const.FirstPlayer;
 
-    public Faction NextPlayer => StepCount % 2 == 0 ? Faction.Black : Faction.White;
+    public Faction NextPlayer => 3 - CurrentPlayer;
 
     public Faction[,] Map
     {
