@@ -1,11 +1,10 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using Point = Point<int>;
 
 public class Chessboard : MonoBehaviour
 {
-    internal Resulter<Point> Result { get; private set; } = new Resulter<Point>();
+    internal Resulter<(int x,int y)> Result { get; private set; } = new Resulter<(int x,int y)>();
 
     public void OnMouseUp()
     {
@@ -17,7 +16,7 @@ public class Chessboard : MonoBehaviour
                 var x = 7 - (int)Math.Round(p.x / Const.UnitSize);
                 var y = 7 + (int)Math.Round(p.y / Const.UnitSize);
 
-                Result.Result(new Point(x, y));
+                Result.Result((x, y));
             }
         }
     }

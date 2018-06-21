@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using Point = Point<int>;
 
 internal abstract class Player
 {
@@ -7,7 +6,7 @@ internal abstract class Player
 
     public virtual string Name { get; set; }
 
-    public abstract Task<Point> GetNext();
+    public abstract Task<(int x, int y)> GetNext();
 
     protected abstract void OnChanged();
 

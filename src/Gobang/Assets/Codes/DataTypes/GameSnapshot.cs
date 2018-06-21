@@ -2,12 +2,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Point = Point<int>;
 
-internal class GameSnapshot : IEnumerable<Point>
+internal class GameSnapshot : IEnumerable<(int x, int y)>
 {
     private GameSnapshot _previous;
-    private Point _stepData;
+    private (int x, int y) _stepData;
 
     public int StepCount { get; private set; }
 
@@ -19,7 +18,7 @@ internal class GameSnapshot : IEnumerable<Point>
 
             while (target.StepCount > 0)
             {
-                if (target._stepData.X == x && target._stepData.Y == y)
+                if (target._stepData.x == x && target._stepData.y == y)
                 {
                     return target.CurrentPlayer;
                 }
@@ -30,9 +29,9 @@ internal class GameSnapshot : IEnumerable<Point>
         }
     }
 
-    public Faction this[Point pos] => this[pos.X, pos.Y];
+    public Faction this[(int x, int y) pos] => this[pos.x, pos.y];
 
-    public Point this[int step]
+    public (int x, int y) this[int step]
     {
         get
         {
@@ -52,9 +51,9 @@ internal class GameSnapshot : IEnumerable<Point>
         }
     }
 
-    public static GameSnapshot operator +(GameSnapshot previous, Point stepData) => new GameSnapshot(previous, stepData);
+    public static GameSnapshot operator +(GameSnapshot previous, (int x, int y) stepData) => new GameSnapshot(previous, stepData);
 
-    public static Point[] operator -(GameSnapshot Current, GameSnapshot Previous)
+    public static (int x, int y)[] operator -(GameSnapshot Current, GameSnapshot Previous)
     {
         if (Previous.StepCount == 0)
         {
@@ -66,7 +65,7 @@ internal class GameSnapshot : IEnumerable<Point>
             return null;
         }
 
-        var result = new List<Point>();
+        var result = new List<(int x, int y)>();
 
         while (Current.StepCount > Previous.StepCount)
         {
@@ -96,7 +95,7 @@ internal class GameSnapshot : IEnumerable<Point>
 
     public GameSnapshot() => StepCount = 0;
 
-    private GameSnapshot(GameSnapshot previous, Point stepData)
+    private GameSnapshot(GameSnapshot previous, (int x, int y) stepData)
     {
         _previous = previous;
         _stepData = stepData;
@@ -111,11 +110,11 @@ internal class GameSnapshot : IEnumerable<Point>
     {
         get
         {
-            var result = new Faction[Const.FieldSize.Width, Const.FieldSize.Height];
+            var result = new Faction[Const.FieldSize.width, Const.FieldSize.height];
 
-            for (var i = 0; i < Const.FieldSize.Width; i++)
+            for (var i = 0; i < Const.FieldSize.width; i++)
             {
-                for (var j = 0; j < Const.FieldSize.Height; j++)
+                for (var j = 0; j < Const.FieldSize.height; j++)
                 {
                     result[i, j] = Faction.None;
                 }
@@ -125,7 +124,7 @@ internal class GameSnapshot : IEnumerable<Point>
 
             while (target.StepCount > 0)
             {
-                result[target._stepData.X, target._stepData.Y] = target.CurrentPlayer;
+                result[target._stepData.x, target._stepData.y] = target.CurrentPlayer;
                 target = target._previous;
             }
 
@@ -133,10 +132,10 @@ internal class GameSnapshot : IEnumerable<Point>
         }
     }
 
-    public IEnumerator<Point> GetEnumerator()
+    public IEnumerator<(int x, int y)> GetEnumerator()
     {
-        GameSnapshot target = this;
-        Point[] result = new Point[StepCount];
+        var target = this;
+        var result = new(int x, int y)[StepCount];
 
         for (int i = StepCount - 1; i >= 0; i--)
         {
@@ -144,7 +143,7 @@ internal class GameSnapshot : IEnumerable<Point>
             target = target._previous;
         }
 
-        return ((IEnumerable<Point>)result).GetEnumerator();
+        return ((IEnumerable<(int x, int y)>)result).GetEnumerator();
     }
 
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();

@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using Point = Point<int>;
 
 internal class ManualPlayer : Player
 {
@@ -11,7 +10,7 @@ internal class ManualPlayer : Player
         _game.UserIO.Initialize();
     }
 
-    public override Task<Point> GetNext() => _game.UserIO.GetClickPoint();
+    public override Task<(int x,int y)> GetNext() => _game.UserIO.GetClickPoint();
 
     protected override void OnChanged() => _game.UserIO.ChessboardData = GameData;
 }

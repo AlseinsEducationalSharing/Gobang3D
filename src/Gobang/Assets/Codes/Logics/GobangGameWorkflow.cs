@@ -25,7 +25,7 @@ internal class GobangGameWorkflow : GameWorkflow
             GobangGame.Next(pos);
             player.GameData = GobangGame.Current;
 
-            if (GobangGame.CheckForWin(pos.X, pos.Y))
+            if (GobangGame.CheckForWin(pos.x, pos.y))
             {
                 await _game.ShowMessage(string.Format("{0}方胜利！", GobangGame.Current.CurrentPlayer == Faction.Black ? "黑" : "白"));
                 return false;

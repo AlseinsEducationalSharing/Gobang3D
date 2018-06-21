@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
-using Point = Point<int>;
 
 internal class UserIO
 {
@@ -50,14 +49,14 @@ internal class UserIO
 
             foreach (var item in dif)
             {
-                var newChess = Object.Instantiate(map[item.X, item.Y] == Faction.Black ? _blackChess : _whiteChess);
+                var newChess = Object.Instantiate(map[item.x, item.y] == Faction.Black ? _blackChess : _whiteChess);
                 newChess.transform.parent = ChessCollection.transform;
-                newChess.transform.localPosition = new Vector3((7 - item.X) * Const.UnitSize, 0, (item.Y - 7) * Const.UnitSize);
+                newChess.transform.localPosition = new Vector3((7 - item.x) * Const.UnitSize, 0, (item.y - 7) * Const.UnitSize);
             }
 
             _chessboardData = value;
         }
     }
 
-    public async Task<Point> GetClickPoint() => await ChessBlocks.GetComponent<Chessboard>().Result;
+    public async Task<(int x, int y)> GetClickPoint() => await ChessBlocks.GetComponent<Chessboard>().Result;
 }
