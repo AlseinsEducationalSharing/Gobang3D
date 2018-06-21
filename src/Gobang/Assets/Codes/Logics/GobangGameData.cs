@@ -6,12 +6,16 @@ internal class GobangGameData
 
     public GobangGameData() => Current = new GameSnapshot();
 
+    private ParallelQuery<(int x, int y)> Directions { get; } = new[] { (1, 0), (0, 1), (1, 1), (1, -1) }.AsParallel();
+
+    private ParallelQuery<int> PosAndNeg { get; } = new[] { -1, 1 }.AsParallel();
+
     public bool CheckForWin(int x, int y) =>
     (
-        from o in new(int x, int y)[] { (1, 0), (0, 1), (1, 1), (1, -1) }.AsParallel()
+        from o in Directions
         select
         (
-            from j in new[] { -1, 1 }.AsParallel()
+            from j in PosAndNeg
             select
             (
                 from i in Enumerable.Range(1, 4)
